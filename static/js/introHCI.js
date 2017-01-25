@@ -3,6 +3,7 @@
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
+	
 })
 
 /*
@@ -10,9 +11,22 @@ $(document).ready(function() {
  */
 function initializePage() {
 	$("#testjs").click(function(e) {
-		$('.jumbotron h1').text("Javascript is connected");
+		$('.jumbotron h1').text("Javascript has taken control");
+		$("#testjs").text("Please wait...");
+		$(".jumbotron p").toggleClass("active");
 	});
-
 	// Add any additional listeners here
+	$(".project").click(projectClick);
 	// example: $("#div-id").click(functionToCall);
+}
+
+function projectClick() {
+	var containingProject = $(this).closest(".project");
+    var description = $(containingProject).find(".project-description");
+    if (description.length == 0) {
+       $(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
+    } else {
+       // $(description).html("<p>Stop clicking on me! You just did it at " + (new Date()) + "</p>");
+       $(description).fadeOut();
+    }
 }
