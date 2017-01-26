@@ -3,7 +3,6 @@
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
-	
 })
 
 /*
@@ -17,16 +16,23 @@ function initializePage() {
 	});
 	// Add any additional listeners here
 	$(".project").click(projectClick);
+	// $("a.thumbnail").click(projectClick);
+
 	// example: $("#div-id").click(functionToCall);
 }
 
-function projectClick() {
+function projectClick(e) {
+	// prevent the page from reloading      
+    e.preventDefault();
+
 	var containingProject = $(this).closest(".project");
     var description = $(containingProject).find(".project-description");
     if (description.length == 0) {
        $(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
-    } else {
+    } else if( $(description).is(':visible') ) {
        // $(description).html("<p>Stop clicking on me! You just did it at " + (new Date()) + "</p>");
        $(description).fadeOut();
+    } else {
+       $(description).fadeIn();
     }
 }
